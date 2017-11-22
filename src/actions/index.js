@@ -1,3 +1,24 @@
+import {GET_ALL_CATEGORY,
+        UPDATE_COMMENT,
+        UPDATE_POST,
+        GET_ALL_POSTS,
+        GET_ALL_POSTS_FILTER_BY_CATEGORY,
+        GET_POST_BY_ID,
+        GET_ALL_POSTS_SORT_BY_TIME,
+        GET_ALL_POSTS_SORT_BY_VOTE,
+        GET_ALL_COMMENT_SORT_BY_VOTE,
+        GET_ALL_COMMENT_SORT_BY_TIME,
+        GET_ALL_COMMENTS,
+        GET_ALL_COMMENTS_BY_ID,
+        DELETE_POST,
+        DELETE_COMMENTS,
+        GET_COMMENT,
+        CREATE_COMMENT,
+        UP_VOTE_COMMENT,
+        DOWN_VOTE_COMMENT,
+        UP_VOTE_POST,
+        DOWN_VOTE_POST,
+        } from './list' 
 import { fetchAllCategories, 
   getPosts, 
   getAllCommentsFromPost, 
@@ -14,56 +35,28 @@ import { fetchAllCategories,
   editComment, 
   deleteComment} from '../api/index'
 
-export const GET_ALL_CATEGORY = 'GET_ALL_CATEGORY'
-export const GET_ALL_POSTS = 'GET_ALL_POSTS'
-export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS'
-export const SET_LOADING = 'SET_LOADING';
-export const UNSET_LOADING = 'UNSET_LOADING';
-export const LOAD_COMMENTS = 'LOAD_COMMENTS';
-export const REFRESH = 'REFRESH';
-export const CREATE_COMMENT = 'CREATE_COMMENT';
-export const UP_VOTE_POST = 'UP_VOTE_POST';
-export const DOWN_VOTE_POST = 'DOWN_VOTE_POST';
-export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
-export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
-export const GET_ALL_COMMENTS_BY_ID='GET_ALL_COMMENTS_BY_ID';
-export const GET_ALL_POSTS_SORT_BY_TIME='GET_ALL_POSTS_SORT_BY_TIME;';
-export const GET_ALL_POSTS_SORT_BY_VOTE='GET_ALL_POSTS_SORT_BY_VOTE';
-export const GET_ALL_POSTS_FILTER_BY_CATEGORY='GET_ALL_POSTS_FILTER_BY_CATEGORY';
-export const GET_POST_BY_ID='GET_POST_BY_ID';
-export const GET_ALL_COMMENT_SORT_BY_TIME='GET_ALL_COMMENT_SORT_BY_TIME';
-export const GET_ALL_COMMENT_SORT_BY_VOTE='GET_ALL_COMMENT_SORT_BY_VOTE'; 
-export const NEW_POST='NEW_POST';
-export const DELETE_POST = 'DELETE_POST';
-export const UPDATE_POST = 'UPDATE_POST';
-export const GET_COMMENT = 'GET_COMMENT';
-export const UPDATE_COMMENT = 'UPDATE_COMMENT';
-export const DELETE_COMMENTS = 'DELETE_COMMENTS';
-// export const editComment = (id, timestamp, body)
-// export const deleteComment = (id)
-// export const newComment = (id, timestamp, body, author, parentId)
 export const LOADING_CATEGORY_ENUM = {
   COMMENTS: 'COMMENTS',
   POSTS: 'POSTS',
   POST: 'POST'
 };
 
-function getAll(categories) {
+export function getAll(categories) {
   return {
-    type:GET_ALL_CATEGORY,
+    type: GET_ALL_CATEGORY,
     categories
   }
 }
 
 export function editComment_(comments){
   return dispatch => {
-    return editComment(comments.id, comments.timestamp, comments.body).then(data => dispatch({type: UPDATE_COMMENT, comments}))
+    return editComment(comments.id, comments.timestamp, comments.body).then(data => dispatch({type:  UPDATE_COMMENT, comments}))
   }
 }
 
 export function editPost_(posts) {
     return dispatch => {
-        return editPost(posts.id, posts.title, posts.body).then(data => dispatch({type: UPDATE_POST, posts}))
+        return editPost(posts.id, posts.title, posts.body).then(data => dispatch({type:  UPDATE_POST, posts}))
     }
 }
 
@@ -76,7 +69,7 @@ export function getAllCategory() {
 
 function getAllPost(posts) {
   return {
-    type:GET_ALL_POSTS,
+    type: GET_ALL_POSTS,
     posts
   }
 }
@@ -92,7 +85,7 @@ export function getAllPosts() {
 
 function getAllPostfilterbycategory_(posts) {
   return {
-    type:GET_ALL_POSTS_FILTER_BY_CATEGORY,
+    type: GET_ALL_POSTS_FILTER_BY_CATEGORY,
     posts
   }
 }
@@ -108,14 +101,14 @@ export function getAllPostfilterbycategory(category) {
 
 function getPostbyId_(posts) {
   return {
-    type:GET_POST_BY_ID,
+    type: GET_POST_BY_ID,
     posts
   }
 }
 export function getPostbyId(posts) {
   return dispatch => {
     return  getPostsById(posts.id).then(data =>
-      dispatch({type:GET_POST_BY_ID, posts}))
+      dispatch({type: GET_POST_BY_ID, posts}))
       // dispatch(data))
   }
 }
@@ -124,7 +117,7 @@ export function getPostbyId(posts) {
 
 function getAllPostsortbytime_(posts) {
   return {
-    type:GET_ALL_POSTS_SORT_BY_TIME,
+    type: GET_ALL_POSTS_SORT_BY_TIME,
     posts
   }
 }
@@ -139,7 +132,7 @@ export function getAllPostsortbytime() {
 
 function getAllPostsortbyvote_(posts) {
   return {
-    type:GET_ALL_POSTS_SORT_BY_VOTE,
+    type: GET_ALL_POSTS_SORT_BY_VOTE,
     posts
   }
 }
@@ -156,7 +149,7 @@ export function getAllPostsortbyvote() {
 
 function getAllCommentsortbyvote_(comments) {
   return {
-    type:GET_ALL_COMMENT_SORT_BY_VOTE,
+    type: GET_ALL_COMMENT_SORT_BY_VOTE,
     comments
   }
 }
@@ -173,7 +166,7 @@ export function getAllCommentsortbyvote(id) {
 
 function getAllCommentsortbytime_(comments) {
   return {
-    type:GET_ALL_COMMENT_SORT_BY_TIME,
+    type: GET_ALL_COMMENT_SORT_BY_TIME,
     comments
   }
 }
@@ -191,7 +184,7 @@ export function getAllCommentsortbytime(id) {
 function getAllComment(comments,id) {
   console.log('cctop',comments, id)
   return {
-    type:GET_ALL_COMMENTS,
+    type: GET_ALL_COMMENTS,
     id,
     comments
   }
@@ -217,7 +210,7 @@ export function getAllComments(post) {
 function getAllCommentById(comments,id) {
   console.log('cctop',comments)
   return {
-    type:GET_ALL_COMMENTS_BY_ID,
+    type: GET_ALL_COMMENTS_BY_ID,
     id,
     comments
   }
@@ -227,7 +220,7 @@ function getAllCommentById(comments,id) {
 export function deletePost_(posts) {
     return dispatch => {
         return deletePost(posts).then(data => {
-            dispatch({type: DELETE_POST, posts})
+            dispatch({type:  DELETE_POST, posts})
         })
     }
 }
@@ -236,7 +229,7 @@ export function deletePost_(posts) {
 export function deleteComment_(comments) {
     return dispatch => {
         return deleteComment(comments.id).then(data => {
-            dispatch({type: DELETE_COMMENTS, comments})
+            dispatch({type:  DELETE_COMMENTS, comments})
         })
     }
 }
@@ -250,19 +243,19 @@ export const getCommente = (id) => dispatch =>(
 
 export const getComment_ = (id) => dispatch => (
     getComment(id)
-    .then(data => dispatch({type: GET_COMMENT, data}))
+    .then(data => dispatch({type:  GET_COMMENT, data}))
   )
 
 
-export function setLoadingAction(type, unitId) {
-  return {
-    type: SET_LOADING,
-    payload: {
-      type,
-      unitId
-    }
-  }
-}
+// export function setLoadingAction(type, unitId) {
+//   return {
+//     type: SET_LOADING,
+//     payload: {
+//       type,
+//       unitId
+//     }
+//   }
+// }
 
 // export const createNewComment = (comments) => dispatch => (
 //     newComment(comments)
@@ -275,14 +268,14 @@ export function setLoadingAction(type, unitId) {
 export function createNewComment(comments) {
     return dispatch => {
         return newComment(comments.id, comments.timestamp, comments.body, comments.author, comments.parentId).then((data) => 
-          {dispatch( {type: CREATE_COMMENT,comments})})
+          {dispatch( {type:  CREATE_COMMENT,comments})})
     }
 }
 
 
 function create(posts) {
     return {
-        type: GET_ALL_POSTS,
+        type:  GET_ALL_POSTS,
         posts
     }
 }
@@ -307,43 +300,43 @@ export function newPost_(posts){
 //   )
 
 
-export function unsetLoadingAction(type, unitId) {
-  return {
-    type: UNSET_LOADING,
-    payload: {
-      type,
-      unitId
-    }
-  }
-}
+// export function unsetLoadingAction(type, unitId) {
+//   return {
+//     type:  UNSET_LOADING,
+//     payload: {
+//       type,
+//       unitId
+//     }
+//   }
+// }
 
-function loadCommentsAction(postId, comments) {
-  return {
-    type: LOAD_COMMENTS,
-    payload: {
-      postId,
-      comments
-    }
-  }
-}
+// function loadCommentsAction(postId, comments) {
+//   return {
+//     type:  LOAD_COMMENTS,
+//     payload: {
+//       postId,
+//       comments
+//     }
+//   }
+// }
 
-export const backendLoadPostComments = (dispatch) => {
-  return function (postId) {
-    dispatch(setLoadingAction(LOADING_CATEGORY_ENUM.COMMENTS, postId));
-    console.log('inside', postId)
-    getAllCommentsFromPost(postId)
-      .then(response => {
-        dispatch(unsetLoadingAction(LOADING_CATEGORY_ENUM.COMMENTS, postId));
-        return dispatch(loadCommentsAction(postId, response))
-      })
-  }
-};
+// export const backendLoadPostComments = (dispatch) => {
+//   return function (postId) {
+//     dispatch(setLoadingAction(LOADING_CATEGORY_ENUM.COMMENTS, postId));
+//     console.log('inside', postId)
+//     getAllCommentsFromPost(postId)
+//       .then(response => {
+//         dispatch(unsetLoadingAction(LOADING_CATEGORY_ENUM.COMMENTS, postId));
+//         return dispatch(loadCommentsAction(postId, response))
+//       })
+//   }
+// };
 
 export const upVoteComment = (id) => dispatch => (
 
     voteComment(id, "upVote")
         .then(comments => dispatch({
-            type: UP_VOTE_COMMENT,
+            type:  UP_VOTE_COMMENT,
             comments
         }))
 );
@@ -351,7 +344,7 @@ export const upVoteComment = (id) => dispatch => (
 export const downVoteComment = (id) => dispatch => (
     voteComment(id, "downVote")
         .then(comments => dispatch({
-            type: DOWN_VOTE_COMMENT,
+            type:  DOWN_VOTE_COMMENT,
             comments
         }))
 );
@@ -384,7 +377,7 @@ export const downVoteComment = (id) => dispatch => (
 export const upVotePost = (id) => dispatch => (
     votePost(id, "upVote")
       .then(posts =>
-      dispatch({type: UP_VOTE_POST,posts}))
+      dispatch({type:  UP_VOTE_POST,posts}))
 
         // .then(posts => 
         //   dispatch({type: UP_VOTE_POST,posts}))
@@ -393,5 +386,5 @@ export const upVotePost = (id) => dispatch => (
 export const downVotePost = (id) => dispatch => (
     votePost(id, "downVote")
         .then(posts => 
-          dispatch({type: DOWN_VOTE_POST,posts}))
+          dispatch({type:  DOWN_VOTE_POST,posts}))
 );

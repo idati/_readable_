@@ -21,7 +21,7 @@ import { GET_ALL_CATEGORY,
 	UPDATE_POST,
 	GET_COMMENT,
 	UPDATE_COMMENT,
-	DELETE_COMMENTS } from '../actions/index'
+	DELETE_COMMENTS } from '../actions/list'
 
 export function categories(state = [], action){
   switch (action.type) {

@@ -38,6 +38,7 @@ class Category extends Component {
       let k=0
 
       console.log(this.props.match.params.category)
+      if(typeof post === 'string'){return(<div>{this.props.history.goBack()}</div>)}
   		return(
   			<div key='36'>
           <ul>
